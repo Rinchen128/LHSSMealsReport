@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://app.onecompiler.com/43wueuebj_43wuswep3/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily Meal Reporting - Lhuentse Higher Secondary School</title>
+  <script src="./saved_resource"></script>
+  <link rel="stylesheet" href="./all.min.css">
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1050; /* Ensure it's above the modal overlay */
+      max-width: 300px;
+      transition: opacity 0.5s;
+    }
+    .notification.hide {
+      opacity: 0;
+    }
+    .upload-area {
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s;
+      position: relative;
+    }
+    .upload-area:hover {
+      border-color: #4caf50;
+    }
+    .upload-area .processing-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-style: italic;
+      color: #333;
+    }
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      max-width: 90%;
+      width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.absolute{position:absolute}.relative{position:relative}.right-4{right:1rem}.top-2{top:0.5rem}.mx-2{margin-left:0.5rem;margin-right:0.5rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mr-2{margin-right:0.5rem}.mt-1{margin-top:0.25rem}.mt-4{margin-top:1rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-12{height:3rem}.h-24{height:6rem}.h-8{height:2rem}.h-screen{height:100vh}.min-h-screen{min-height:100vh}.w-12{width:3rem}.w-24{width:6rem}.w-8{width:2rem}.w-full{width:100%}.min-w-full{min-width:100%}.max-w-md{max-width:28rem}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-gray-200 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(229 231 235 / var(--tw-divide-opacity, 1))}.overflow-x-auto{overflow-x:auto}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.border{border-width:1px}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-green-100{--tw-bg-opacity:1;background-color:rgb(220 252 231 / var(--tw-bg-opacity, 1))}.bg-indigo-100{--tw-bg-opacity:1;background-color:rgb(224 231 255 / var(--tw-bg-opacity, 1))}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-red-100{--tw-bg-opacity:1;background-color:rgb(254 226 226 / var(--tw-bg-opacity, 1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-yellow-100{--tw-bg-opacity:1;background-color:rgb(254 249 195 / var(--tw-bg-opacity, 1))}.object-cover{object-fit:cover}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-8{padding-top:2rem;padding-bottom:2rem}.text-left{text-align:left}.text-center{text-align:center}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.tracking-wider{letter-spacing:0.05em}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-blue-900{--tw-text-opacity:1;color:rgb(30 58 138 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-green-700{--tw-text-opacity:1;color:rgb(21 128 61 / var(--tw-text-opacity, 1))}.text-green-900{--tw-text-opacity:1;color:rgb(20 83 45 / var(--tw-text-opacity, 1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.text-indigo-700{--tw-text-opacity:1;color:rgb(67 56 202 / var(--tw-text-opacity, 1))}.text-indigo-900{--tw-text-opacity:1;color:rgb(49 46 129 / var(--tw-text-opacity, 1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-red-900{--tw-text-opacity:1;color:rgb(127 29 29 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-700{--tw-text-opacity:1;color:rgb(161 98 7 / var(--tw-text-opacity, 1))}.text-yellow-900{--tw-text-opacity:1;color:rgb(113 63 18 / var(--tw-text-opacity, 1))}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:rgb(67 56 202 / var(--tw-bg-opacity, 1))}.hover\:bg-red-600:hover{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.hover\:text-indigo-500:hover{--tw-text-opacity:1;color:rgb(99 102 241 / var(--tw-text-opacity, 1))}.focus\:border-indigo-500:focus{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-indigo-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(99 102 241 / var(--tw-ring-opacity, 1))}.focus\:ring-offset-2:focus{--tw-ring-offset-width:2px}@media (min-width: 768px){.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}}</style></head>
+<body class="bg-gray-100 min-h-screen font-sans">
+  <div id="notifications" class="notification hide"></div>
+
+  <div id="authContainer" class="flex justify-center items-center h-screen">
+    <div id="loginContainer" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md fade-in">
+      <div class="text-center mb-4">
+        <div class="logo-container justify-center">
+          <img src="./Sherig-logo-150x150.png" class="w-12 h-12 mr-2">
+          <span class="text-xl font-bold text-gray-800">Lhuentse Higher Secondary School</span>
+          <img src="./123847327_3709893715707764_5355420106519032995_n.jpg" class="w-12 h-12 mr-2">
+        </div>
+      </div>
+      <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">
+        Daily Meal Reporting Dashboard
+      </h2>
+      <form id="loginForm">
+        <div class="mb-4">
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="name" class="mt-1 block w-full h-10 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter your name" required="">
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" class="mt-1 block w-full h-10 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter password" required="">
+        </div>
+        <div class="mb-4">
+          <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+          <select id="role" class="mt-1 block w-full h-10 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+            <option value="">Select Role</option>
+            <option value="teacher">Teacher on Duty</option>
+            <option value="mess">Mess Management Team</option>
+            <option value="principal">Principal</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200">
+          Login
+        </button>
+        <div class="mt-4 text-sm text-center">
+            <a href="https://app.onecompiler.com/43wueuebj_43wuswep3/#" id="showRegister" class="font-medium text-indigo-600 hover:text-indigo-500">Don't have an account? Register</a>
+            <span class="mx-2 text-gray-400">|</span>
+            <a href="https://app.onecompiler.com/43wueuebj_43wuswep3/#" id="showForgotPassword" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot Password?</a>
+        </div>
+      </form>
+    </div>
+
+    <div id="registrationContainer" class="hidden bg-white p-8 rounded-lg shadow-lg w-full max-w-md fade-in">
+        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Create Account</h2>
+        <form id="registrationForm">
+            <div class="mb-4">
+                <label for="regName" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="regName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+            </div>
+            <div class="mb-4">
+                <label for="regPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="regPassword" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+            </div>
+            <div class="mb-4">
+                <label for="regConfirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input type="password" id="regConfirmPassword" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+            </div>
+            <div class="mb-4">
+                <label for="regRole" class="block text-sm font-medium text-gray-700">Role</label>
+                <select id="regRole" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+                    <option value="">Select Role</option>
+                    <option value="teacher">Teacher on Duty</option>
+                    <option value="mess">Mess Management Team</option>
+                    <option value="principal">Principal</option>
+                </select>
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">Register</button>
+            <div class="mt-4 text-sm text-center">
+                <a href="https://app.onecompiler.com/43wueuebj_43wuswep3/#" id="showLoginFromRegister" class="font-medium text-indigo-600 hover:text-indigo-500">Already have an account? Login</a>
+            </div>
+        </form>
+    </div>
+
+    <div id="forgotPasswordContainer" class="hidden bg-white p-8 rounded-lg shadow-lg w-full max-w-md fade-in">
+        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Forgot Password</h2>
+        <form id="forgotPasswordForm">
+            <div class="mb-4">
+                <label for="forgotName" class="block text-sm font-medium text-gray-700">Enter your name</label>
+                <input type="text" id="forgotName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">Verify Name</button>
+            <div class="mt-4 text-sm text-center">
+                <a href="https://app.onecompiler.com/43wueuebj_43wuswep3/#" id="showLoginFromForgot" class="font-medium text-indigo-600 hover:text-indigo-500">Back to Login</a>
+            </div>
+        </form>
+    </div>
+
+    <div id="resetPasswordContainer" class="hidden bg-white p-8 rounded-lg shadow-lg w-full max-w-md fade-in">
+        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Reset Password</h2>
+        <form id="resetPasswordForm">
+            <div class="mb-4">
+                <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
+                <input type="password" id="newPassword" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+            </div>
+            <div class="mb-4">
+                <label for="confirmNewPassword" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+                <input type="password" id="confirmNewPassword" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">Reset Password</button>
+        </form>
+    </div>
+
+  </div>
+
+  <div id="dashboard" class="hidden container mx-auto px-4 py-8">
+    <header class="bg-white p-6 rounded-lg shadow-lg mb-8 flex justify-between items-center">
+      <div class="logo-container">
+        <img src="./Sherig-logo-150x150.png" class="w-8 h-8 mr-2">
+        <img src="./123847327_3709893715707764_5355420106519032995_n.jpg" class="w-8 h-8 mr-2">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800 mb-1">
+            Daily Meal Reporting
+          </h1>
+          <span class="text-lg text-gray-600">Lhuentse Higher Secondary School</span>
+        </div>
+      </div>
+      <div id="userInfo" class="flex items-center space-x-4">
+        <span id="currentUser" class="text-gray-600"></span>
+        <button id="logout" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <section id="summarySection" class="bg-white p-6 rounded-lg shadow-lg mb-8 fade-in">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">All Report Summary</h2>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-center">
+        <div class="bg-indigo-100 p-4 rounded-lg shadow">
+          <p class="text-4xl font-bold text-indigo-700" id="totalReports">20</p>
+          <p class="text-indigo-900 font-semibold">Total Reports</p>
+        </div>
+        <div class="bg-yellow-100 p-4 rounded-lg shadow">
+          <p class="text-4xl font-bold text-yellow-700" id="submittedReports">1</p>
+          <p class="text-yellow-900 font-semibold">Submitted</p>
+        </div>
+        <div class="bg-blue-100 p-4 rounded-lg shadow">
+          <p class="text-4xl font-bold text-blue-700" id="verifiedReports">0</p>
+          <p class="text-blue-900 font-semibold">Verified</p>
+        </div>
+        <div class="bg-green-100 p-4 rounded-lg shadow">
+          <p class="text-4xl font-bold text-green-700" id="approvedReports">3</p>
+          <p class="text-green-900 font-semibold">Approved</p>
+        </div>
+        <div class="bg-red-100 p-4 rounded-lg shadow">
+          <p class="text-4xl font-bold text-red-700" id="rejectedReports">0</p>
+          <p class="text-red-900 font-semibold">Rejected</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="teacherSection" class="hidden bg-white p-6 rounded-lg shadow-lg mb-8 fade-in">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        Submit Daily Meal Report
+      </h2>
+      <form id="mealForm">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Date</label>
+          <input type="date" id="reportDate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required="">
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Breakfast Menu:</label>
+          <textarea id="breakfast" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Friedrice with Dhal"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Lunch Menu:</label>
+          <textarea id="lunch" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Grilled chicken with rice"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Snack Menu:</label>
+          <textarea id="snack" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Apple slices with nuts"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Dinner Menu:</label>
+          <textarea id="dinner" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Pasta with vegetables"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Additional Comments:</label>
+          <textarea id="todcomment" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Any additional notes or remarks"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Photos (Breakfast, Lunch, Snack, Dinner)</label>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="upload-area" id="uploadBreakfast">
+              <div class="text-center">
+                <img id="breakfastImg" src="https://app.onecompiler.com/43wueuebj_43wuswep3/" alt="Breakfast Preview" class="w-24 h-24 object-cover mx-auto mb-2 hidden rounded-md shadow-md">
+                <span>Breakfast Photo</span>
+                <input type="file" class="hidden" id="breakfastFile" accept="image/*">
+              </div>
+            <div class="processing-overlay hidden">Processing...</div></div>
+            <div class="upload-area" id="uploadLunch">
+              <div class="text-center">
+                <img id="lunchImg" src="https://app.onecompiler.com/43wueuebj_43wuswep3/" alt="Lunch Preview" class="w-24 h-24 object-cover mx-auto mb-2 hidden rounded-md shadow-md">
+                <span>Lunch Photo</span>
+                <input type="file" class="hidden" id="lunchFile" accept="image/*">
+              </div>
+            <div class="processing-overlay hidden">Processing...</div></div>
+            <div class="upload-area" id="uploadSnack">
+              <div class="text-center">
+                <img id="snackImg" src="https://app.onecompiler.com/43wueuebj_43wuswep3/" alt="Snack Preview" class="w-24 h-24 object-cover mx-auto mb-2 hidden rounded-md shadow-md">
+                <span>Snack Photo</span>
+                <input type="file" class="hidden" id="snackFile" accept="image/*">
+              </div>
+            <div class="processing-overlay hidden">Processing...</div></div>
+            <div class="upload-area" id="uploadDinner">
+              <div class="text-center">
+                <img id="dinnerImg" src="https://app.onecompiler.com/43wueuebj_43wuswep3/" alt="Dinner Preview" class="w-24 h-24 object-cover mx-auto mb-2 hidden rounded-md shadow-md">
+                <span>Dinner Photo</span>
+                <input type="file" class="hidden" id="dinnerFile" accept="image/*">
+              </div>
+            <div class="processing-overlay hidden">Processing...</div></div>
+          </div>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
+          Submit Report
+        </button>
+      </form>
+    </section>
+
+    <section id="messSection" class="hidden bg-white p-6 rounded-lg shadow-lg mb-8 fade-in">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        Verify Submitted Reports
+      </h2>
+      <div id="messReportsList" class="space-y-4"></div>
+    </section>
+
+    <section id="principalSection" class="hidden bg-white p-6 rounded-lg shadow-lg mb-8 fade-in">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        Approve Verified Reports
+      </h2>
+      <div id="principalReportsList" class="space-y-4"></div>
+    </section>
+
+    <section id="tabularReportsSection" class="hidden bg-white p-6 rounded-lg shadow-lg mb-8 fade-in">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">All Reports (Tabular View)</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted By</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Breakfast</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lunch</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="reportsTableBody" class="bg-white divide-y divide-gray-200">
+                    </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="historySection" class="bg-white p-6 rounded-lg shadow-lg fade-in">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">Report History (Card View)</h2>
+      <div id="historyList" class="space-y-4"></div>
+    </section>
+  </div>
+
+  <div id="reportModal" class="modal-overlay hidden">
+    <div class="modal-content bg-white p-6 rounded-lg shadow-xl relative">
+      <button id="closeModal" class="absolute top-2 right-4 text-2xl text-gray-600 hover:text-gray-900">×</button>
+      <div id="modalBody">
+        </div>
+    </div>
+  </div>
+
+
+  <script>
+    const REPORTS_STORAGE_KEY = "mealReports";
+    const USERS_STORAGE_KEY = "mealReportUsers";
+
+    let currentUser = null;
+    let reports = JSON.parse(localStorage.getItem(REPORTS_STORAGE_KEY)) || [];
+    let users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY)) || [];
+    let userToResetName = null;
+
+    // --- DOM Elements ---
+    const authContainer = document.getElementById("authContainer");
+    const loginContainer = document.getElementById("loginContainer");
+    const registrationContainer = document.getElementById("registrationContainer");
+    const forgotPasswordContainer = document.getElementById("forgotPasswordContainer");
+    const resetPasswordContainer = document.getElementById("resetPasswordContainer");
+    const dashboard = document.getElementById("dashboard");
+    const reportModal = document.getElementById('reportModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const modalBody = document.getElementById('modalBody');
+
+    // --- Utility Functions ---
+    function saveReports() {
+      try {
+        localStorage.setItem(REPORTS_STORAGE_KEY, JSON.stringify(reports));
+      } catch (e) {
+        console.error("Error saving reports to localStorage:", e);
+        showNotification("Error: Could not save the report. Storage may be full.", "error");
+        reports.pop(); 
+        throw new Error("Could not save report. Storage may be full.");
+      }
+    }
+    function saveUsers() {
+      localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+    }
+
+    function showNotification(message, type = "info") {
+      const notification = document.getElementById("notifications");
+      let bgColor = "bg-blue-500";
+      if (type === "success") bgColor = "bg-green-500";
+      if (type === "error") bgColor = "bg-red-500";
+
+      notification.textContent = message;
+      notification.className = `notification ${bgColor} text-white p-4 rounded-lg shadow-md`;
+      notification.classList.remove("hide");
+      setTimeout(() => {
+        notification.classList.add("hide");
+      }, 5000);
+    }
+
+    // --- Auth View Management ---
+    function showView(view) {
+        loginContainer.classList.add("hidden");
+        registrationContainer.classList.add("hidden");
+        forgotPasswordContainer.classList.add("hidden");
+        resetPasswordContainer.classList.add("hidden");
+        view.classList.remove("hidden");
+    }
+
+    document.getElementById("showRegister").addEventListener("click", (e) => {
+        e.preventDefault();
+        showView(registrationContainer);
+    });
+    document.getElementById("showForgotPassword").addEventListener("click", (e) => {
+        e.preventDefault();
+        showView(forgotPasswordContainer);
+    });
+    document.getElementById("showLoginFromRegister").addEventListener("click", (e) => {
+        e.preventDefault();
+        showView(loginContainer);
+    });
+    document.getElementById("showLoginFromForgot").addEventListener("click", (e) => {
+        e.preventDefault();
+        showView(loginContainer);
+    });
+
+    // --- Authentication Logic ---
+    document.getElementById("registrationForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const name = document.getElementById("regName").value.trim();
+        const password = document.getElementById("regPassword").value;
+        const confirmPassword = document.getElementById("regConfirmPassword").value;
+        const role = document.getElementById("regRole").value;
+
+        if (!name || !password || !role) {
+            showNotification("Please fill in all fields.", "error");
+            return;
+        }
+        if (password !== confirmPassword) {
+            showNotification("Passwords do not match.", "error");
+            return;
+        }
+        if (users.find(u => u.name === name)) {
+            showNotification("Name already exists.", "error");
+            return;
+        }
+
+        users.push({ name, password, role });
+        saveUsers();
+        showNotification("Registration successful! Please log in.", "success");
+        this.reset();
+        showView(loginContainer);
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const password = document.getElementById("password").value;
+      const role = document.getElementById("role").value;
+      if (!name || !role || !password) {
+        showNotification("Please fill in all fields.", "error");
+        return;
+      }
+      
+      const foundUser = users.find(u => u.name === name && u.password === password && u.role === role);
+
+      if (foundUser) {
+          currentUser = { name: foundUser.name, role: foundUser.role };
+          authContainer.classList.add("hidden");
+          dashboard.classList.remove("hidden");
+          document.getElementById("currentUser").textContent = `${name} (${role})`;
+          updateDashboard();
+      } else {
+          showNotification("Invalid name, password, or role.", "error");
+      }
+    });
+
+    document.getElementById("forgotPasswordForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const name = document.getElementById("forgotName").value.trim();
+        const userExists = users.find(u => u.name === name);
+        if (userExists) {
+            userToResetName = name;
+            showNotification("Name verified. Please set a new password.", "success");
+            showView(resetPasswordContainer);
+        } else {
+            showNotification("Name not found.", "error");
+        }
+    });
+    
+    document.getElementById("resetPasswordForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmNewPassword = document.getElementById("confirmNewPassword").value;
+
+        if (newPassword !== confirmNewPassword) {
+            showNotification("Passwords do not match.", "error");
+            return;
+        }
+        
+        const userIndex = users.findIndex(u => u.name === userToResetName);
+        if (userIndex !== -1) {
+            users[userIndex].password = newPassword;
+            saveUsers();
+            showNotification("Password has been reset successfully. Please log in.", "success");
+            userToResetName = null;
+            this.reset();
+            document.getElementById("forgotPasswordForm").reset();
+            showView(loginContainer);
+        } else {
+             showNotification("An unexpected error occurred.", "error");
+        }
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+      currentUser = null;
+      dashboard.classList.add("hidden");
+      authContainer.classList.remove("hidden");
+      showView(loginContainer);
+      document.getElementById("loginForm").reset();
+      document.getElementById("mealForm").reset();
+      resetPhotoPreviews();
+    });
+    
+    // --- Dashboard Logic ---
+    function updateDashboard() {
+      const { role } = currentUser;
+      const teacherSection = document.getElementById("teacherSection");
+      const messSection = document.getElementById("messSection");
+      const principalSection = document.getElementById("principalSection");
+      const tabularSection = document.getElementById("tabularReportsSection");
+
+      teacherSection.classList.add("hidden");
+      messSection.classList.add("hidden");
+      principalSection.classList.add("hidden");
+      tabularSection.classList.add("hidden");
+
+
+      if (role === "teacher") {
+        teacherSection.classList.remove("hidden");
+      } else if (role === "mess") {
+        messSection.classList.remove("hidden");
+        tabularSection.classList.remove("hidden");
+        renderReports("submitted", document.getElementById("messReportsList"), true);
+      } else if (role === "principal") {
+        principalSection.classList.remove("hidden");
+        tabularSection.classList.remove("hidden");
+        renderReports(
+          "verified",
+          document.getElementById("principalReportsList"),
+          false,
+          true
+        );
+      }
+      renderHistory();
+      renderTabularReports();
+      updateSummary();
+    }
+
+    function resetPhotoPreviews() {
+      ["breakfast", "lunch", "snack", "dinner"].forEach((meal) => {
+        const img = document.getElementById(`${meal}Img`);
+        img.src = "";
+        img.classList.add("hidden");
+      });
+    }
+
+    function compressImage(file) {
+        return new Promise((resolve, reject) => {
+            const MAX_WIDTH = 800;
+            const MAX_HEIGHT = 800;
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+            img.onload = () => {
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height = Math.round((height * MAX_WIDTH) / width);
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width = Math.round((width * MAX_HEIGHT) / height);
+                        height = MAX_HEIGHT;
+                    }
+                }
+
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                URL.revokeObjectURL(img.src);
+                resolve(canvas.toDataURL('image/jpeg', 0.7));
+            };
+            img.onerror = (error) => {
+                URL.revokeObjectURL(img.src);
+                reject(error);
+            };
+        });
+    }
+
+
+    ["breakfast", "lunch", "snack", "dinner"].forEach((meal) => {
+      const uploadArea = document.getElementById(`upload${meal.charAt(0).toUpperCase() + meal.slice(1)}`);
+      const input = document.getElementById(`${meal}File`);
+      const img = document.getElementById(`${meal}Img`);
+      
+      const processingOverlay = document.createElement('div');
+      processingOverlay.className = 'processing-overlay hidden';
+      processingOverlay.textContent = 'Processing...';
+      uploadArea.appendChild(processingOverlay);
+
+      uploadArea.addEventListener("click", () => input.click());
+      input.addEventListener("change", async function () {
+        const file = this.files[0];
+        if (file) {
+          if (!file.type.startsWith('image/')) {
+            showNotification('Please select a valid image file.', 'error');
+            return;
+          }
+          
+          processingOverlay.classList.remove('hidden');
+          try {
+            const compressedDataUrl = await compressImage(file);
+            img.src = compressedDataUrl;
+            img.classList.remove("hidden");
+          } catch(error) {
+            console.error('Image compression failed:', error);
+            showNotification('Could not process the image.', 'error');
+          } finally {
+            processingOverlay.classList.add('hidden');
+          }
+        }
+      });
+    });
+
+    document.getElementById("mealForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const date = document.getElementById("reportDate").value;
+      if (!date) {
+        showNotification("Please select a date.", "error");
+        return;
+      }
+      
+      const report = {
+        id: Date.now(),
+        date: date,
+        teacher: currentUser.name,
+        breakfast: document.getElementById("breakfast").value,
+        lunch: document.getElementById("lunch").value,
+        snack: document.getElementById("snack").value,
+        dinner: document.getElementById("dinner").value,
+        photos: {
+            breakfast: document.getElementById("breakfastImg").src,
+            lunch: document.getElementById("lunchImg").src,
+            snack: document.getElementById("snackImg").src,
+            dinner: document.getElementById("dinnerImg").src,
+        },
+        status: "submitted",
+        createdAt: new Date().toISOString(),
+        teacherComment: document.getElementById("todcomment").value,
+        verifierComment: null,
+        principalComment: null,
+        rejectionComment: null,
+      };
+
+      reports.push(report);
+      try {
+        saveReports();
+        showNotification("Report submitted successfully!", "success");
+        setTimeout(() => {
+          showNotification("Notification sent to Mess Management and Principal", "info");
+        }, 1000);
+        updateDashboard();
+        this.reset();
+        resetPhotoPreviews();
+      } catch (error) {
+        console.error("Submission failed:", error);
+      }
+    });
+
+    function renderReports(status, container, isVerification, isApproval = false) {
+      container.innerHTML = "";
+      const filteredReports = reports.filter((r) => r.status === status);
+
+      if (filteredReports.length === 0) {
+        container.innerHTML = `<p class="text-gray-500">No ${status} reports found.</p>`;
+        return;
+      }
+
+      filteredReports.forEach((report) => {
+        const div = document.createElement("div");
+        div.className = "border border-gray-200 p-4 rounded-md bg-gray-50";
+        let actionUI = '';
+
+        if (isVerification) {
+            actionUI = `
+                <div class="mt-4">
+                    <label for="comment-mess-${report.id}" class="block text-sm font-medium text-gray-700">Verifier Comments:</label>
+                    <textarea id="comment-mess-${report.id}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Add comments here..."></textarea>
+                    <div class="mt-2 flex gap-x-2">
+                        <button class="flex-1 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" onclick="verifyReport(${report.id})">Verify</button>
+                        <button class="flex-1 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onclick="rejectReport(${report.id}, 'mess')">Reject</button>
+                    </div>
+                </div>
+            `;
+        }
+        if (isApproval) {
+            actionUI = `
+                <div class="mt-4">
+                    <label for="comment-principal-${report.id}" class="block text-sm font-medium text-gray-700">Principal Comments:</label>
+                    <textarea id="comment-principal-${report.id}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Add comments here..."></textarea>
+                    <div class="mt-2 flex gap-x-2">
+                        <button class="flex-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="approveReport(${report.id})">Approve</button>
+                        <button class="flex-1 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onclick="rejectReport(${report.id}, 'principal')">Reject</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        div.innerHTML = createReportCardHTML(report) + actionUI;
+        container.appendChild(div);
+      });
+    }
+
+    window.verifyReport = function (id) {
+      const report = reports.find((r) => r.id === id);
+      const comment = document.getElementById(`comment-mess-${id}`).value;
+      if (report) {
+        report.status = "verified";
+        report.verifierComment = comment;
+        report.verifiedBy = currentUser.name;
+        report.verifiedAt = new Date().toISOString();
+        saveReports();
+        showNotification("Report verified!", "success");
+        setTimeout(() => showNotification("Notification sent to Principal", "info"), 1000);
+        updateDashboard();
+      }
+    };
+
+    window.approveReport = function (id) {
+      const report = reports.find((r) => r.id === id);
+      const comment = document.getElementById(`comment-principal-${id}`).value;
+      if (report) {
+        report.status = "approved";
+        report.principalComment = comment;
+        report.approvedBy = currentUser.name;
+        report.approvedAt = new Date().toISOString();
+        saveReports();
+        showNotification("Report approved!", "success");
+        updateDashboard();
+      }
+    };
+
+    window.rejectReport = function(id, role) {
+        const report = reports.find((r) => r.id === id);
+        const commentInput = document.getElementById(`comment-${role}-${id}`);
+        const comment = commentInput.value.trim();
+
+        if (!comment) {
+            showNotification("Rejection comment is required.", "error");
+            commentInput.focus();
+            return;
+        }
+
+        if (report) {
+            report.status = "rejected";
+            report.rejectionComment = comment;
+            report.rejectedBy = currentUser.name;
+            report.rejectedAt = new Date().toISOString();
+            saveReports();
+            showNotification("Report has been rejected.", "success");
+            updateDashboard();
+        }
+    };
+
+    function renderHistory() {
+      const container = document.getElementById("historyList");
+      container.innerHTML = "";
+      
+      let reportsToDisplay = reports.slice().reverse(); // Show newest first
+      if (currentUser.role === "teacher") {
+          reportsToDisplay = reportsToDisplay.filter((r) => r.teacher === currentUser.name);
+      }
+      
+      if (reportsToDisplay.length === 0) {
+          container.innerHTML = `<p class="text-gray-500">No reports found.</p>`;
+          return;
+      }
+      
+      reportsToDisplay.forEach((report) => {
+          container.appendChild(createReportCard(report));
+      });
+    }
+
+    function createReportCard(report) {
+      const div = document.createElement("div");
+      div.className = "border border-gray-200 p-4 rounded-md bg-white shadow-sm";
+      div.innerHTML = createReportCardHTML(report);
+      return div;
+    }
+
+    function createReportCardHTML(report) {
+      const cleanPhotoSrc = (src) => src && src.startsWith('data:image') ? src : '';
+      
+      const commentSection = (label, comment, author) => {
+        return comment ? `<div class="mt-2 p-2 bg-gray-50 rounded-md border border-gray-200"><p class="text-sm font-semibold text-gray-700">${label} (by ${author}):</p><p class="text-sm text-gray-600">${comment}</p></div>` : '';
+      }
+      
+      const rejectionSection = (report) => {
+          if(report.status !== 'rejected') return '';
+          return `<div class="mt-2 p-2 bg-red-50 rounded-md border border-red-200"><p class="text-sm font-semibold text-red-700">Rejected by ${report.rejectedBy}:</p><p class="text-sm text-red-600">${report.rejectionComment}</p></div>`;
+      }
+
+      return `
+        <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="font-semibold text-gray-800">Date: ${report.date}</p>
+              <p class="text-sm text-gray-500">By: ${report.teacher}</p>
+            </div>
+            ${getStatusBadge(report.status)}
+        </div>
+        ${report.teacherComment ? `<p class="text-sm text-gray-600 italic">" ${report.teacherComment} "</p>` : ''}
+        <hr class="my-2">
+        <p><strong>Breakfast:</strong> ${report.breakfast || 'N/A'}</p>
+        <p><strong>Lunch:</strong> ${report.lunch || 'N/A'}</p>
+        <p><strong>Snack:</strong> ${report.snack || 'N/A'}</p>
+        <p><strong>Dinner:</strong> ${report.dinner || 'N/A'}</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
+          ${Object.entries(report.photos)
+            .map(([meal, src]) => {
+              const imgSrc = cleanPhotoSrc(src);
+              return imgSrc
+                ? `<div class="text-center"><img src="${imgSrc}" alt="${meal}" class="w-full h-24 object-cover rounded shadow-sm"><span class="text-xs text-gray-600">${meal.charAt(0).toUpperCase() + meal.slice(1)}</span></div>`
+                : '';
+            }).join("")}
+        </div>
+        ${commentSection('Verifier Comment', report.verifierComment, report.verifiedBy)}
+        ${commentSection('Principal Comment', report.principalComment, report.approvedBy)}
+        ${rejectionSection(report)}
+      `;
+    }
+
+    function renderTabularReports() {
+        const tableBody = document.getElementById('reportsTableBody');
+        tableBody.innerHTML = '';
+
+        if(reports.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-gray-500 py-4">No reports to display.</td></tr>`;
+            return;
+        }
+
+        reports.slice().reverse().forEach(report => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${report.date}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${report.teacher}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${getStatusBadge(report.status)}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.breakfast || 'N/A'}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${report.lunch || 'N/A'}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button onclick="viewReportDetails(${report.id})" class="text-indigo-600 hover:text-indigo-900">View Details</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function getStatusBadge(status) {
+        let colorClasses = '';
+        switch (status) {
+            case 'submitted':
+                colorClasses = 'bg-yellow-100 text-yellow-800';
+                break;
+            case 'verified':
+                colorClasses = 'bg-blue-100 text-blue-800';
+                break;
+            case 'approved':
+                colorClasses = 'bg-green-100 text-green-800';
+                break;
+            case 'rejected':
+                colorClasses = 'bg-red-100 text-red-800';
+                break;
+            default:
+                colorClasses = 'bg-gray-100 text-gray-800';
+        }
+        return `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${colorClasses}">${status}</span>`;
+    }
+
+    window.viewReportDetails = function(id) {
+        const report = reports.find(r => r.id === id);
+        if (report) {
+            modalBody.innerHTML = createReportCardHTML(report);
+            reportModal.classList.remove('hidden');
+        }
+    }
+
+    closeModalBtn.addEventListener('click', () => {
+        reportModal.classList.add('hidden');
+    });
+
+    reportModal.addEventListener('click', (e) => {
+        if (e.target === reportModal) {
+            reportModal.classList.add('hidden');
+        }
+    });
+
+    function updateSummary() {
+      const total = reports.length;
+      const submitted = reports.filter((r) => r.status === "submitted").length;
+      const verified = reports.filter((r) => r.status === "verified").length;
+      const approved = reports.filter((r) => r.status === "approved").length;
+      const rejected = reports.filter((r) => r.status === "rejected").length;
+
+      document.getElementById("totalReports").textContent = total;
+      document.getElementById("submittedReports").textContent = submitted;
+      document.getElementById("verifiedReports").textContent = verified;
+      document.getElementById("approvedReports").textContent = approved;
+      document.getElementById("rejectedReports").textContent = rejected;
+    }
+
+    // Initialize
+    updateSummary();
+
+  </script>
+
+</body></html>
